@@ -1,0 +1,125 @@
+.backdrop {
+	position: fixed;
+	top: 0px;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	background: linear-gradient(#000000, transparent, #000000),
+		url('/resources/images/1.jpg') no-repeat center bottom;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.custom_panel {
+	padding-top: 50px;
+}
+
+.page {
+	/*模拟A4打印纸*/
+	width: 210mm;
+	/*纸张宽度*/
+	min-height: 297mm;
+	/*纸张高度*/
+	padding: 10mm;
+	/*物理打印边距*/
+	margin: 10mm auto;
+	/*分页之间的显示间隔距离*/
+	background: rgba(255, 255, 255, 0.1);
+	/*模拟纸张颜色*/
+	outline: 0.1mm #D3D3D3 solid;
+	/*模拟纸张边沿*/
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	/*添加阴影使模拟的纸张看起来更逼真*/
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+.page>.content {
+	/*模拟打印内容区域*/
+	position: relative;
+	/* padding: 10mm; */
+	/*页边距*/
+	height: 277mm;
+	/*内容高度,默认自动*/
+	outline: 0.1mm #AAA solid;
+	/*打印边框,不占内容区域*/
+	overflow: hidden;
+	/*禁止内容超过容器*/
+}
+
+.page>.content>* {
+	position: absolute;
+}
+
+.menu {
+	position: fixed;
+	right: 20px;
+	bottom: 50px;
+	width: 120px;
+	height: auto;
+	display: flex;
+	flex-flow: column;
+}
+
+.menu>* {
+	margin: 5px 0px;
+}
+
+#tips {
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+	color: #666;
+}
+
+@media print {
+	@page {
+		size: A4 portrait;
+		/*A4: 210mm × 297mm*/
+		/*portrait|纵向; landscape|横向;*/
+		margin: 0;
+		/*页边距*/
+	}
+
+	html,
+	body {
+		width: 210mm !important;
+		min-width: 210mm !important;
+		height: 297mm !important;
+		min-height: 297mm !important;
+	}
+
+	body>*,
+	.custom_panel>* {
+		opacity: 0 !important;
+		/*hide other nodes*/
+	}
+
+	.header,
+	.menu,
+	#tips {
+		display: none;
+		margin-top: -100%;
+	}
+
+	.custom_panel {
+		padding: 0;
+	}
+
+	.custom_panel,
+	.page {
+		opacity: 1 !important;
+		/*only show page nodes*/
+		margin: 0;
+		width: initial;
+		min-height: initial;
+		box-shadow: initial;
+		page-break-after: always;
+		background: initial;
+	}
+
+	.page>.content {
+		outline: initial;
+		/*隐藏打印边框*/
+	}
+}

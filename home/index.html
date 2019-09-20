@@ -3,371 +3,65 @@
 
 <head>
 	<meta charset="utf-8">
-
 	<title>AmusingDevice</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="robots" content="index, follow">
-	<meta charset="UTF-8">
 	<meta name="author" content="Antecer">
 	<meta name="keywords" content="osu,osu!,keypad,keypad switch,mini keypad,gaming keypad,usb keypad, osu keypad,keyboard,antecer,antecer keypad,programmable keypad,osu nono,mechanical keypad,cherry mx,amusingkeypad ">
 	<meta name="description" content="The AmusingKeypad is a keypad specially designed for the osu! game that allows the swapping of mechanical switches and easy portability.">
-	<link rel="stylesheet" href="../resources/fontawesome/css/all.min.css">
-	<link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="animate.css">
+	<link rel="stylesheet" href="/resources/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="/resources/flagicons/css/flag-icon.css">
+	<link rel="stylesheet" href="/resources/animate.css">
 	<link rel="stylesheet" href="index.css">
-	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src="index.js" defer></script>
 </head>
 
 <body>
-	<iframe class="navigation" src="../resources/head/index.html" name="headFrame" frameborder="0" scrolling="no" style="
-		width: 100%;
-		height: 900px;
-	    top: 0px;
-	"></iframe>
-
-	<nav id="navbar2" class="dropnavigation navbar animated fadeInDown stickyfirst">
-		<div class="navbar-header left">
-			<a href="/" style="border-color: #fff !important; transition: color 0.3s ease; -webkit-transition: color 0.3s ease; -moz-transition: color 0.3s ease; animation: breathingwhite 3s linear infinite;" id="navicon">
-				<b>Antecer</b>
-			</a>
-
-			<div style="margin-top: 17px; white-space: nowrap;">
-				<img id="flag2" style="height: 20px;" />
-				<span class="hovertext2">Change country</span>
-			</div>
-		</div>
-		<a onclick="clicksticky();" style="font-size: 25px;" data-toggle="collapse" data-target="#collapsibleNavbar">
-			<i class="fas fa-angle-down"></i>
-		</a>
-		<div class="collapse navbar-collapse cz-nav" id="collapsibleNavbar">
-			<ul class="navbar-right">
-				<li><a href="/"><i class="fas fa-home"></i>Home</a></li>
-				<li><a href="/products"><i class="fas fa-archive"></i>Products</a></li>
-				<li><a href="/driver"><i class="fas fa-terminal"></i>Drivers</a></li>
-				<li><a href="/customization"><i class="fas fa-palette"></i>Customization</a></li>
-				<li><a href="/contact"><i class="fas fa-file-signature"></i>Contact</a></li>
-			</ul>
-		</div>
-	</nav>
-
-	<div class="banner-nav-img animated fadeIn">
-		<div class="banner-nav-text module" style="justify-content: center; align-content: center; margin-bottom: auto;">
-			<h2 style="text-align: left;"><a id="gradient">Antecer's</a> official website!</h2>
-			<p style="margin-top: 10px;"> A custom made mechanical keypad for osu with hotswappable switches. Compatible with everyswitch that contains of 2 pins. </p>
-			<p style="font-size: 12px; margin-top: 10px;"> Scroll down for more </p>
-		</div>
-		<div class="scrolldownarrow">
-			<a class="scrolldown"><i class="fas fa-chevron-down"></i></a>
-		</div>
-	</div>
-
-	<div id="particles-js"></div>
-	<div class="container animated2 fadeIn" style="align-items: center; justify-content: center; text-align: center;">
-		<div class="row" style="margin-top: 100px;">
-			<div class="col-md-6 animated2 fadeIn" style="display:block;">
-				<div class="row">
-					<div class="mx-auto d-block marginamusingtext1" style="justify-content: center; align-content: center; margin-bottom: auto;">
-						<h1 id="gradient">Amusing Keypad</h1>
-						<h5 style="text-shadow: 0px 0px 2px #000000; text-align: right;">Made by Antecer</h5>
-						<p style="text-shadow: 0px 0px 2px #000000; text-align: right; margin-top: 50px;">Dev by <a style="color: #f4c989 !important;">Steve2312</a> & <a style="color: #f4c989 !important;">Ramen</a> & <a style="color: #f4c989 !important;">Stubbs</a> & <a style="color: #f4c989 !important;">Antecer</a></p>
-					</div>
+	<!--导航-->
+	<div class="header fold animated fadeInDown">
+		<link rel="stylesheet" href="/resources/head/index.css">
+		<script src="/resources/head/index.js" defer></script>
+		<div class="content">
+			<div class="navpanel">
+				<div class="navicon">AmusingDevice</div>
+				<div class="navlink">
+					<a target="_top" class="fas fa-home" href="/home/">Home</a>
+					<a target="_top" class="fas fa-archive" href="/products/">Products</a>
+					<a target="_top" class="fas fa-palette" href="/prettify/">Prettify</a>
+					<a target="_top" class="fas fa-terminal" href="/driver/">Drivers</a>
+					<a target="_top" class="fas fa-envelope" href="/contact/">Contact</a>
+					<a href="javascript:;" id="selectCY">
+						<div class="fas fa-globe-asia">ShipTo</div>
+					</a>
 				</div>
 			</div>
-
-			<div class="col-md-6 animated2 fadeIn" style="display:block;">
-				<div class="row">
-					<div class="mx-auto d-block marginamusingtext1" style="justify-content: center; align-content: center; margin-bottom: auto;">
-						<p style="text-shadow: 0px 0px 2px #000000; text-align: left; margin-top: 40px;">Track your package here!</p>
-						<div class="trackBar" style="margin-top: 20px;">
-							<input id="tracking_number" type="text" placeholder="Tracking Number">
-							<input id="tracker_button" onclick="submit()" type="button" value="Track">
-						</div>
-						<p style="opacity: 0.6; text-shadow: 0px 0px 2px #000000; text-align: right; margin-top: 30px;">Powered by 17track</p>
-					</div>
-				</div>
+			<div class="cypanel">
+				<div class="space"></div>
+				<div class="cylist"></div>
 			</div>
 		</div>
 	</div>
-
-
-	<div class="container animated2 fadeIn" style="align-items: center; justify-content: center; text-align: center;">
-
-		<hr style="margin-top: 70px !important;" />
-
-		<div class="row" style="margin-top: 20px;">
-			<div class="col-md-12 animated2 fadeIn" style="display:block;">
-				<h1 class="animated fadeIn" style="margin-bottom: 50px; display:block; text-align: left">A <a class="animationdelay2s" id="gradient">keypad</a> is everything you need!</h1>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6 animated2  fadeIn" style="display:block;">
-				<div class="row">
-					<div class="keypadall mx-auto d-block" style="justify-content: center; align-content: center; margin-bottom: auto;">
-						<img src="images/2.0.png" />
-						<img src="images/2.1.png" />
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 animated2 fadeIn" style="display: block;">
-				<div class="row">
-					<div class="mx-auto" style="justify-content: center; align-content: center; margin-bottom: auto; text-align: left !important;">
-						<div style="margin: 30px;">
-							<p>The <strong>AmusingKeypad</strong> is a special osu! Game design and development of keyboard products.</p>
-							<p><strong>Product introduction:</strong></p>
-							<ul>
-								<li>
-									<strong>Custom Buttons</strong> - You can bind any number of normal key values to the same button to achieve the
-									same input.
-								</li>
-								<li><strong>Multimedia support</strong> - Play, Pause, Next, Prev, Vol+, Vol-, Mute, and other keycodes.</li>
-								<li>
-									<strong>Simulate mouse</strong> - You can use it to do some mouse work, such as Left button, right button, wheel,
-									and absolute coordinates positioning.
-								</li>
-								<li>
-									<strong>Light display</strong> - It contains multiple rgb-led, and you can specify different colors or display
-									modes for each Led.
-								</li>
-								<li>
-									<strong>Response speed</strong> - It uses a special key-switch filter algorithm to achieve the fastest press
-									trigger speed.
-								</li>
-								<li><strong>Boot Loader</strong> - Built-in boot loader so that it can always get the latest features and ideas.</li>
-								<li>
-									<strong>Configuration</strong> - It has a portable Windows software to change the configuration, the new
-									configuration will be stored in the keyboard chip, even if you connect it to other devices can be used.
-								</li>
-							</ul>
-
-							<table class="table" style="margin-top: 100px;">
-								<thead>
-									<tr>
-										<th scope="col">Item</th>
-										<th scope="col">Description</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Key Switches</td>
-										<td>You can use any switch that is compatible with cherry</td>
-									</tr>
-									<tr>
-										<td>Small button</td>
-										<td>Use silicone key cap, feel more comfortable</td>
-									</tr>
-									<tr>
-										<td>Non-slip Mat</td>
-										<td>Washable and clean sticky pad</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row" style="margin-top: 100px;">
-			<div class="col-md-12 animated2 fadeIn" style="display:block;">
-				<h1 class="animated fadeIn" style="margin-bottom: 50px; display:block; text-align: center;">When <a class="animationdelay2s" id="gradient">Steve</a> doesn't know <a class="animationdelay2s" id="gradient">what</a> to do!</h1>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6 animated2 fadeIn" style="display:block;">
-				<div class="row">
-					<div class="keypadall mx-auto d-block" style="justify-content: center; align-content: center; margin-bottom: auto;">
-						<img src="idk.png" />
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 animated2 fadeIn" style="display: block;">
-				<div class="row">
-					<div class="mx-auto" style="justify-content: center; align-content: center; margin-bottom: auto; text-align: left !important;">
-						<div style="margin: 30px;">
-							<p>When <strong>Steve</strong> doesn't know what to write. Then u gotta tell Steve what to do, unless you dont want anything on the site.</p>
-							<p><strong>Steve will do these things if u don't tell him what to do.:</strong></p>
-							<ul>
-								<li>
-									<strong>One</strong> - Lay down on the bed.
-								</li>
-								<li>
-									<strong>Two</strong> - Do nothing
-								</li>
-								<li>
-									<strong>Three</strong> - Ask Stubbs, Ramen or Antecer.
-								</li>
-								<li>
-									<strong>Four</strong> - sBeve
-								</li>
-								<li>
-									<strong>Five</strong> - Close Visual Studio.
-								</li>
-								<li>
-									<strong>Six</strong> - Give up.
-								</li>
-								<li>
-									<strong>Seven</strong> - Wasting his time on making this paragraph.
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<hr class="changecountryhr" style="margin-top: 70px;" />
-
-		<div class="row">
-			<div class="col-md-12 animated2 fadeIn" style="display:block;">
-				<h4 class="animated fadeIn" style="margin-bottom: 20px; display:block; text-align: left">Change your <a class="animationdelay2s" id="gradient">location</a>!</h4>
-				<p class="animated fadeIn" style="display:block; text-align: left; margin-left: 20px; margin-right: 20px;">Set your shipping destination here. If your country is not listing below, select the "Global" option!</p>
-			</div>
-		</div>
-
-		<div class="row" style="flex-wrap: nowrap !important;">
-			<div class="col-md-4" style="display:block;">
-				<div class="row">
-					<div class="mx-auto" style="justify-content: center; align-content: center; margin-bottom: auto; text-align: left !important;">
-						<div class="changecountrytab">
-							<img src="flags/au.png" /><a onclick="changeCountryTo('au')">Australia</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/at.png" /><a onclick="changeCountryTo('at')">Austria</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/be.png" /><a onclick="changeCountryTo('be')">Belgium</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/br.png" /><a onclick="changeCountryTo('br')">Brazil</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/ca.png" /><a onclick="changeCountryTo('ca')">Canada</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/hk.png" /><a onclick="changeCountryTo('hk')">China Hong Kong</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/dk.png" /><a onclick="changeCountryTo('dk')">Denmark</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/fi.png" /><a onclick="changeCountryTo('fi')">Finland</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/fr.png" /><a onclick="changeCountryTo('fr')">France</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/gr.png" /><a onclick="changeCountryTo('gr')">Greece</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/hu.png" /><a onclick="changeCountryTo('hu')">Hungary</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/id.png" /><a onclick="changeCountryTo('id')">Indonesia</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/ie.png" /><a onclick="changeCountryTo('ie')">Ireland</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4" style="display:block;">
-				<div class="row">
-					<div class="mx-auto" style="justify-content: center; align-content: center; margin-bottom: auto; text-align: left !important;">
-						<div class="changecountrytab">
-							<img src="flags/il.png" /><a onclick="changeCountryTo('il')">Israel</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/it.png" /><a onclick="changeCountryTo('it')">Italy</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/jp.png" /><a onclick="changeCountryTo('jp')">Japan</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/kz.png" /><a onclick="changeCountryTo('kz')">Kazakhstan</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/kr.png" /><a onclick="changeCountryTo('kr')">Korea</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/lu.png" /><a onclick="changeCountryTo('lu')">Luxembourg</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/my.png" /><a onclick="changeCountryTo('my')">Malaysia</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/mx.png" /><a onclick="changeCountryTo('mx')">Mexico</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/nl.png" /><a onclick="changeCountryTo('nl')">Netherlands</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/nz.png" /><a onclick="changeCountryTo('nz')">New Zealand</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/no.png" /><a onclick="changeCountryTo('no')">Norway</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/pl.png" /><a onclick="changeCountryTo('pl')">Poland</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/pt.png" /><a onclick="changeCountryTo('pt')">Portugal</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4" style="display:block;">
-				<div class="row">
-					<div class="mx-auto" style="justify-content: center; align-content: center; margin-bottom: auto; text-align: left !important;">
-						<div class="changecountrytab">
-							<img src="flags/ru.png" /><a onclick="changeCountryTo('ru')">Russia</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/sa.png" /><a onclick="changeCountryTo('sa')">Saudi Arabia</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/sg.png" /><a onclick="changeCountryTo('sg')">Singapore</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/es.png" /><a onclick="changeCountryTo('es')">Spain</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/se.png" /><a onclick="changeCountryTo('se')">Sweden</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/ch.png" /><a onclick="changeCountryTo('ch')">Switzerland</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/th.png" /><a onclick="changeCountryTo('th')">Thailand</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/tr.png" /><a onclick="changeCountryTo('tr')">Turkey</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/ua.png" /><a onclick="changeCountryTo('ua')">Ukraine</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/gb.png" /><a onclick="changeCountryTo('gb')">United Kingdom</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/us.png" /><a onclick="changeCountryTo('us')">United States</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/vn.png" /><a onclick="changeCountryTo('vn')">Vietnam</a>
-						</div>
-						<div class="changecountrytab">
-							<img src="flags/gl.png" /><a onclick="changeCountryTo('gl')">Global</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr style="margin-top: 40px;" />
-
-		<div class="row">
-			<div class="col-md-12" style="display:block;">
-				<div class="row">
+	<!--页脚-->
+	<div class="footer"></div>
+	<!--背景-->
+	<img class="backdrop" src="" alt="">
+	<!--正文-->
+	<div class="context">
+		<div class="content">
+			<div class="exhibit">
+				<div class="videoBox">
+					<video id="videoPlayer" class="videoPlayer video-js vjs-big-play-centered" controls="controls" preload="metadata" poster="/videos/6 digit chokes.mp4.png" data-setup='{}'>
+						<source src="/videos/6 digit chokes.mp4" type="video/mp4">
+						</source>
+						<p class="vjs-no-js">
+							To view this video please enable JavaScript, and consider upgrading to a web browser that
+							<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+						</p>
+					</video>
+					<link rel="stylesheet" href="//vjs.zencdn.net/7.3.0/video-js.min.css">
+					<link rel="stylesheet" href="/videos/video.css">
+					<script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
+					<script src="/videos/video.js"></script>
 				</div>
 			</div>
 		</div>

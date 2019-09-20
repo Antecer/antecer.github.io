@@ -3,54 +3,39 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>headnav</title>
-	<link rel="stylesheet" href="../fontawesome/css/all.min.css">
-	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/resources/animate.css">
-	<link rel="stylesheet" href="index.css">
-	<script src="index.js" defer></script>
+	<link rel="stylesheet" href="/resources/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/flagicons/css/flag-icon.css">
 </head>
 
 <body>
-	<nav id="navbar" class="navigation navbar navbar-inverse navbar-fixed-top animated fadeInDown stickyfirst" role="navigation">
-		<div class="container" style="margin-top: 5px;">
-			<div class="navbar-header left">
-				<a href="/" style="border-color: #fff !important; transition: color 0.3s ease; -webkit-transition: color 0.3s ease; -moz-transition: color 0.3s ease; animation: breathingwhite 3s linear infinite;" id="navicon">
-					<b>AmusingDevice</b>
-				</a>
-				<div style="margin-top: 17px; white-space: nowrap;">
-					<img id="flag" style="height: 20px;" />
-					<span class="hovertext">Change country</span>
+	<!--导航栏-->
+	<div class="header">
+		<link rel="stylesheet" href="/resources/head/index.css">
+		<script src="/resources/head/index.js" defer></script>
+		<div class="content">
+			<div class="navpanel">
+				<div class="navicon">AmusingDevice</div>
+				<div class="navlink fold">
+					<a target="_top" class="fas fa-home" href="/home/">Home</a>
+					<a target="_top" class="fas fa-archive" href="/products/">Products</a>
+					<a target="_top" class="fas fa-palette" href="/prettify/">Prettify</a>
+					<a target="_top" class="fas fa-terminal" href="/driver/">Drivers</a>
+					<a target="_top" class="fas fa-envelope" href="/contact/">Contact</a>
+					<a href="javascript:;" id="selectCY">
+						<div class="fas fa-globe-asia">ShipTo</div>
+					</a>
 				</div>
 			</div>
-
-			<div class="navbar-header hz-nav right">
-				<ul class="navbar-right">
-					<li><a target="_parent" href="/home/"><i class="fas fa-home"></i>Home</a></li>
-					<li><a target="_parent" href="/products/"><i class="fas fa-archive"></i>Products</a></li>
-					<li><a target="_parent" href="/driver/"><i class="fas fa-terminal"></i>Drivers</a></li>
-					<li><a target="_parent" href="/prettify/"><i class="fas fa-palette"></i>Prettify</a></li>
-					<li><a target="_parent" href="/contact/"><i class="fas fa-envelope"></i>Contact</a></li>
-				</ul>
+			<div class="cypanel">
+				<div class="space"></div>
+				<div class="cylist"></div>
 			</div>
 		</div>
-	</nav>
-	<script>
-		// 从本地存储中获取存储的id
-		var aClick = sessionStorage.getItem('aClick');
-		if (aClick) {
-			//改变id对应的a标签的字体颜色以及加粗
-			document.getElementById(aClick).style.cssText = 'color: green; font-weight: 400';
-		}
-		//点击时存储id
-		document.querySelectorAll('.navbar-right a').forEach(item => {
-			item.addEventListener('click', e => {
-				sessionStorage.setItem('aClick', item.id);
-			})
-		})
-	</script>
+	</div>
 </body>
 
 </html>

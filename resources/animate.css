@@ -1594,3 +1594,27 @@
 .slideOutUp {
   animation-name: slideOutUp;
 }
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+
+	50% {
+		background-position: 100% 50%
+	}
+
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+.gradient,
+.gradient-hover:hover {
+	animation-delay: 1s;
+	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-size: 400% 400%;
+	animation: Gradient 15s ease infinite;
+}
