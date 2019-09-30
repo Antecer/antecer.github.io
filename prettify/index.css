@@ -14,22 +14,22 @@
 	padding-top: 50px;
 }
 
+/*模拟A4打印纸*/
 .page {
-	/*模拟A4打印纸*/
-	width: 210mm;
 	/*纸张宽度*/
-	min-height: 297mm;
+	width: 210mm;
 	/*纸张高度*/
-	padding: 10mm;
+	min-height: 297mm;
 	/*物理打印边距*/
-	margin: 10mm auto;
+	padding: 10mm;
 	/*分页之间的显示间隔距离*/
-	background: rgba(255, 255, 255, 0.1);
+	margin: 10mm auto;
 	/*模拟纸张颜色*/
-	outline: 0.1mm #D3D3D3 solid;
+	background: rgba(255, 255, 255, 0.1);
 	/*模拟纸张边沿*/
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	outline: 0.1mm #D3D3D3 solid;
 	/*添加阴影使模拟的纸张看起来更逼真*/
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
@@ -37,14 +37,14 @@
 .page>.content {
 	/*模拟打印内容区域*/
 	position: relative;
-	/* padding: 10mm; */
 	/*页边距*/
-	height: 277mm;
+	/* padding: 10mm; */
 	/*内容高度,默认自动*/
-	outline: 0.1mm #AAA solid;
+	height: 277mm;
 	/*打印边框,不占内容区域*/
-	overflow: hidden;
+	outline: 0.1mm rgba(128, 128, 128, 0.5) solid;
 	/*禁止内容超过容器*/
+	overflow: hidden;
 }
 
 .page>.content>* {
@@ -70,6 +70,10 @@
 	left: 10px;
 	bottom: 10px;
 	color: #666;
+}
+
+svg.hide {
+	display: none;
 }
 
 @media print {

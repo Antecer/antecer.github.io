@@ -35,7 +35,7 @@ function setStock(product = 'None', colors = {
 // keypadk5库存管理
 setStock('keypadk5', {
 	'Silver': true,
-	'Black': false
+	'Black': true
 });
 
 // keypadk5库存管理

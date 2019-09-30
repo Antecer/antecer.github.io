@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="/resources/flagicons/css/flag-icon.css">
 	<link rel="stylesheet" href="/resources/animate.css">
 	<link rel="stylesheet" href="index.css">
+	<script src="index.js" defer></script>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
 					<a target="_top" class="fas fa-home" href="/home/">Home</a>
 					<a target="_top" class="fas fa-archive" href="/products/">Products</a>
 					<a target="_top" class="fas fa-palette" href="/prettify/">Prettify</a>
-					<a target="_top" class="fas fa-terminal" href="/driver/">Drivers</a>
+					<a target="_top" class="fas fa-terminal" href="/drivers/">Drivers</a>
 					<a target="_top" class="fas fa-envelope" href="/contact/">Contact</a>
 					<a href="javascript:;" id="selectCY">
 						<div class="fas fa-globe-asia">ShipTo</div>
@@ -50,8 +51,8 @@
 		<div class="page animated zoomIn">
 			<div class="content">
 				<img id="cropImg" src="" />
-				<svg class="keypadpro" version="1.1" xmlns="http://www.w3.org/2000/svg"
-					 style="width:50mm; height:50mm; fill:transparent; stroke-width: 0.2mm; stroke:gray">
+				<svg id="keypadk5" class="cutImg" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					 style="width:50mm; height:50mm; fill:transparent; stroke-width: 0.2mm; stroke:gray;">
 					<rect class="outline" x="0mm" y="0mm" rx="2.5mm" ry="2.5mm" width="50mm" height="50mm" />
 					<circle class="assHole" cx="4mm" cy="4mm" r="2.5mm" />
 					<circle class="assHole" cx="46mm" cy="4mm" r="2.5mm" />
@@ -63,9 +64,27 @@
 					<circle class="buttonHole" cx="25mm" cy="34mm" r="2.3mm" />
 					<circle class="buttonHole" cx="37mm" cy="34mm" r="2.3mm" />
 				</svg>
+				<svg id="keypadk6" class="cutImg hide" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					 style="width:70mm; height:50mm; fill:transparent; stroke-width: 0.2mm; stroke:gray">
+					<rect class="outline" x="0mm" y="0mm" rx="2.5mm" ry="2.5mm" width="70mm" height="50mm" />
+					<circle class="assHole" cx="4mm" cy="4mm" r="2.5mm" />
+					<circle class="assHole" cx="66mm" cy="4mm" r="2.5mm" />
+					<circle class="assHole" cx="66mm" cy="46mm" r="2.5mm" />
+					<circle class="assHole" cx="4mm" cy="46mm" r="2.5mm" />
+					<rect class="switchHole" x="8mm" y="8mm" width="14mm" height="14mm" />
+					<rect class="switchHole" x="28mm" y="8mm" width="14mm" height="14mm" />
+					<rect class="switchHole" x="48mm" y="8mm" width="14mm" height="14mm" />
+					<rect class="switchHole" x="8mm" y="28mm" width="14mm" height="14mm" />
+					<rect class="switchHole" x="28mm" y="28mm" width="14mm" height="14mm" />
+					<rect class="switchHole" x="48mm" y="28mm" width="14mm" height="14mm" />
+				</svg>
 			</div>
 		</div>
 		<div class="menu animated fadeInRight">
+			<select name="cutOptions">
+				<option value="keypadk5">KeyPadPro</option>
+				<option value="keypadk6">KeyPadK6</option>
+			</select>
 			<div class="colorpicker" style="display: flex; outline: 1px #D3D3D3 solid; height: 100px;cursor: crosshair;">
 				<div id="picker" style="min-width: 100px; margin-right: 5px;"></div>
 				<div id="slider"></div>
@@ -90,7 +109,7 @@
 				let nodeW = selectNode.getBoundingClientRect().width;
 				let nodeH = selectNode.getBoundingClientRect().height;
 				// 获取裁剪尺寸
-				let cutLine = document.querySelector('svg.keypadpro');
+				let cutLine = document.querySelector('svg.cutImg:not([class*="hide"])');
 				let cutX = cutLine.getBoundingClientRect().left;
 				let cutY = cutLine.getBoundingClientRect().top;
 				let cutW = cutLine.getBoundingClientRect().width;
@@ -175,7 +194,7 @@
 			});
 			// 取色器插件
 			ColorPicker(document.querySelector('#slider'), document.querySelector('#picker'), (hex, hsv, rgb, mousePicker, mouseSlider) => {
-				document.querySelector('svg.keypadpro').style.stroke = hex;
+				document.querySelector('svg.cutImg:not([class*="hide"])').style.stroke = hex;
 			});
 		</script>
 	</div>
