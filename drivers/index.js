@@ -9,6 +9,8 @@ function downloadApp() {
 			let downnode = document.createElement("a");
 			downnode.download = 'AmusingDeviceApplication.exe';
 			downnode.href = `/drivers/app/app_${lastVer}.exe`;
+			document.body.appendChild(downnode); // Fix for firefox, the anchor has to be appended to the DOM.
 			downnode.click();
+			document.body.removeChild(downnode);
 		})
 }
