@@ -3,8 +3,8 @@ function downloadApp() {
 		.then(res => res.text())
 		.then(txt => {
 			let versions = txt.split('\n');
+			console.log('AppVerList:', versions);
 			let lastVer = versions.length > 0 ? versions[0] : '0.0.0.0';
-			console.log('LastAppVer:', lastVer)
 
 			let downnode = document.createElement("a");
 			downnode.download = 'AmusingDeviceApplication.exe';
