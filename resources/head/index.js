@@ -60,7 +60,8 @@ const shippingList = [
 	"TR",
 	"UA",
 	"US",
-	"VN"
+	"VN",
+	"CN"
 ];
 
 const countryListEN = {
@@ -247,7 +248,8 @@ const countryListEN = {
 	"ZA": "South Africa",
 	"ZM": "Zambia",
 	"ZR": "Zaire",
-	"ZW": "Zimbabwe"
+	"ZW": "Zimbabwe",
+	"CN": "China"
 };
 
 const countryListCN = {
@@ -434,7 +436,8 @@ const countryListCN = {
 	"ZA": "南非",
 	"ZM": "赞比亚",
 	"ZR": "扎伊尔",
-	"ZW": "津巴布韦"
+	"ZW": "津巴布韦",
+	"CN": "中国"
 };
 
 // 显示或隐藏国家选择列表
@@ -461,10 +464,9 @@ document.querySelector('#selectCY').addEventListener('click', e => {
 	}
 	countryTable.addEventListener('click', e => {
 		var selectedCY = e.target;
-		if (selectedCY.outerHTML.indexOf('id=') == -1) return;
+		if (selectedCY.id == '') return;
 		document.querySelector('#selectCY').innerHTML = e.target.outerHTML;
 		document.querySelector('.cypanel').style.display = 'none';
-		navResize();
 		localStorage.setItem('ShipTo', selectedCY.id);
 	});
 	var saveCY = localStorage.getItem('ShipTo');
