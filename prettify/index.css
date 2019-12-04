@@ -5,7 +5,7 @@
 	height: 100vh;
 	z-index: -1;
 	background: linear-gradient(#000000, transparent, #000000),
-		url('/resources/images/1.jpg') no-repeat center bottom;
+		url('/resources/images/banner1.jpg') no-repeat center bottom;
 	background-attachment: fixed;
 	background-size: cover;
 }

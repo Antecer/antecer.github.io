@@ -5,7 +5,7 @@
 	height: 100vh;
 	z-index: -1;
 	background: linear-gradient(#000000, transparent, #000000),
-		url('/resources/images/1.jpg') no-repeat center bottom;
+		url('/resources/images/banner1.jpg') no-repeat center bottom;
 	background-attachment: fixed;
 	background-size: cover;
 }
@@ -32,4 +32,21 @@
 	width: 100%;
 	height: 100%;
 	align-items: center;
+}
+
+.discord{
+	height: 3em;
+}
+
+.discord::before{
+	content: "\00a0";
+	background-size: contain;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	position: relative;
+	display: inline-block;
+	width: 3em;
+	line-height: 1em;
+	margin-right: 0.2em;
+	background-image: url(../contact/icons/discord.svg);
 }
