@@ -61,16 +61,16 @@
 	margin: 0.5em 0.1em 0em 0.1em;
 }
 
+.email::before {
+	background-image: url('/resources/fontawesome/svgs/solid/mail-bulk.svg');
+}
+
 .discord::before {
 	background-image: url('/resources/fontawesome/svgs/brands/discord.svg');
 }
 
 .github::before {
 	background-image: url('/resources/fontawesome/svgs/brands/github.svg');
-}
-
-.email::before {
-	background-image: url('/resources/fontawesome/svgs/solid/mail-bulk.svg');
 }
 
 .faq {
