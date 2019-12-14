@@ -1,0 +1,87 @@
+.backdrop {
+	position: fixed;
+	top: 0px;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	background: linear-gradient(#000000, transparent, #000000),
+		url('/resources/images/banner1.jpg') no-repeat center bottom;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.context,
+.context * {
+	display: flex;
+}
+
+.context {
+	width: 100vw;
+	min-height: 100vh;
+	justify-content: center;
+}
+
+.context>.content {
+	width: 100vw;
+	max-width: 1000px;
+	flex-flow: column;
+	justify-content: center;
+}
+
+.exhibit {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.06);
+	/* align-items: center; */
+}
+
+.contact {
+	margin-top: 0.5rem;
+	padding: 0.3rem;
+	flex-flow: column;
+	background-color: rgba(128, 128, 128, 0.1);
+	font-size: 0.4rem;
+	font-weight: 900;
+}
+
+.contact>a {
+	color: #FFF;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.contact>a::before {
+	content: "\00a0";
+	background-size: contain;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	position: relative;
+	display: inline-block;
+	width: 1em;
+	margin: 0.5em 0.1em 0em 0.1em;
+}
+
+.discord::before {
+	background-image: url('/resources/fontawesome/svgs/brands/discord.svg');
+}
+
+.github::before {
+	background-image: url('/resources/fontawesome/svgs/brands/github.svg');
+}
+
+.email::before {
+	background-image: url('/resources/fontawesome/svgs/solid/mail-bulk.svg');
+}
+
+.faq {
+	margin: 0.5rem 0 0 0.1rem;
+	padding: 0.3rem;
+	flex: 1;
+	flex-flow: column;
+	background-color: rgba(128, 128, 128, 0.1);
+	font-size: 0.4rem;
+}
+
+.faq>.title {
+	align-self: center;
+}
