@@ -1,4 +1,2 @@
 # Antecer's new website project.
-What do i actually type in here
-
-try git hook again
+Vacation Time: 2020/1/15-2/2
