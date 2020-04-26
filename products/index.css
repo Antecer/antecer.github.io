@@ -58,6 +58,7 @@
 .productItem>img {
 	width: 100%;
 	object-fit: cover;
+	visibility: hidden;
 }
 
 .productItem>:not(img) {
