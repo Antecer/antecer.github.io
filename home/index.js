@@ -38,7 +38,7 @@ function checkWebSiteOnline(good, fail) {
 		}
 	}, 500);
 	// 访问目标图片
-	image.src = `http://youtube.com/favicon.ico?${Math.random()}`;
+	image.src = `https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico?${Math.random()}`;
 }
 
 (async () => {
