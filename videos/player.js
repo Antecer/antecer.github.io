@@ -13,7 +13,7 @@ const playList = [
 ];
 
 // 创建播放列表缓存
-var blobList = [];
+var blobList = {};
 
 /**
  * 创建sleep方法(用于async / await的延时处理)
@@ -30,13 +30,14 @@ function sleep(ms) {
 async function LoadVideo(linkList) {
 	for (let i = 0, len = linkList.length; i < len; i++) {
 		let loadLink = `${playPath}${linkList[i]}`;
+		//console.log(`[${(new Date()).toTimeString().split(' ')[0]}] onLoad:`, loadLink);
 		let response = await fetch(loadLink);
 		if (!response.ok) {
 			console.log("Failed:", loadLink);
 			continue;
 		}
-		blobList.push(window.URL.createObjectURL(await response.blob()));
-		console.log("Loaded:", loadLink);
+		blobList[linkList] = window.URL.createObjectURL(await response.blob());
+		//console.log(`[${(new Date()).toTimeString().split(' ')[0]}] Loaded:`, loadLink);
 	}
 }
 
@@ -47,26 +48,26 @@ async function LoadVideo(linkList) {
 	video.src = URL.createObjectURL(new MediaSource());
 	// 视频播放结束事件
 	video.addEventListener('ended', () => {
-		let index = 0;
-		let videoLink = video.src;
-		for (let i = 0, len = blobList.length; i < len; i++) {
-			if (videoLink == blobList[i]) {
-				index = ++i < blobList.length ? i : 0;
+		for (let i = 0, len = playList.length; i < len; ++i) {
+			if (video.src == blobList[playList[i]]) {
+				if (++i < len && blobList[playList[i]]) {
+					video.src = blobList[playList[i]];
+					if (++i < len && !blobList[playList[i]]) {
+						LoadVideo([playList[i]]);
+					}
+				} else {
+					video.src = blobList[playList[0]];
+				}
 				break;
 			}
 		}
-		video.src = blobList[index];
-		video.load();
 		video.play();
-		// 预加载下一个视频(如果有)
-		if (++index < playList.length && index >= blobList.length) {
-			LoadVideo([playList[index]]);
-		}
 	});
 	// 加载播放列表
 	await LoadVideo([playList[0]]);
 	// 载入第一个视频
-	video.src = blobList[0];
+	video.src = blobList[playList[0]];
+	video.play();
 	// 预加载下一个视频
 	if (playList.length > 1) await LoadVideo([playList[1]]);
 })();
