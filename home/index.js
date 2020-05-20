@@ -11,7 +11,7 @@ function sleep(ms) {
  * @param {Function} good 判定成功后执行的回调函数
  * @param {Function} fail 判定失败后执行的回调函数
  */
-function checkWebSiteOnline(good, fail) {
+function NetworkChecker(good, fail) {
 	// 添加超时判断 0-未知,1-成功,2-失败,3-超时
 	let isTimeOver = 0;
 	// 新建image元素,作为判断依据
@@ -44,7 +44,7 @@ function checkWebSiteOnline(good, fail) {
 (async () => {
 	while (!document.querySelector('.videoBox>iframe')) await sleep(500);
 	let playBox = document.querySelector('.videoBox>iframe');
-	checkWebSiteOnline(
+	NetworkChecker(
 		() => {
 			if (window.location.host != `antecer.github.io`)
 				playBox.src = `//antecer.github.io/videos/`;

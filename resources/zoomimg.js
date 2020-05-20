@@ -1,10 +1,12 @@
-var zoomCSS = document.createElement('style');
-zoomCSS.innerHTML = ".zoom { cursor: zoom-in; }";
-document.head.appendChild(zoomCSS);
+/**
+ * 创建sleep方法(用于async / await的延时处理)
+ * @param {int} ms 延时毫秒数
+ */
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-var zoomPanel = document.createElement('div');
-document.body.appendChild(zoomPanel);
-var zoomHtml = `
+const zoomHtml = `
 <div onclick="this.style.display='none'"
 	style="
 	position: fixed;
@@ -21,8 +23,19 @@ var zoomHtml = `
 	style="width: 80%; object-fit: cover;">
 </div>`;
 
-document.querySelectorAll('.zoom').forEach(img => {
-	img.addEventListener('click', e => {
-		zoomPanel.innerHTML = zoomHtml.replace('imgPath', img.src);
+(async () => {
+	while (!document.querySelector('.zoom')) await sleep(1000);
+
+	var zoomCSS = document.createElement('style');
+	zoomCSS.innerHTML = ".zoom { cursor: zoom-in; }";
+	document.head.appendChild(zoomCSS);
+
+	var zoomPanel = document.createElement('div');
+	document.body.appendChild(zoomPanel);
+
+	document.querySelectorAll('.zoom').forEach(img => {
+		img.addEventListener('click', e => {
+			zoomPanel.innerHTML = zoomHtml.replace('imgPath', img.src);
+		});
 	});
-});
+})();

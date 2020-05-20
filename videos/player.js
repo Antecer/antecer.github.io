@@ -30,14 +30,12 @@ function sleep(ms) {
 async function LoadVideo(linkList) {
 	for (let i = 0, len = linkList.length; i < len; i++) {
 		let loadLink = `${playPath}${linkList[i]}`;
-		//console.log(`[${(new Date()).toTimeString().split(' ')[0]}] onLoad:`, loadLink);
 		let response = await fetch(loadLink);
 		if (!response.ok) {
 			console.log("Failed:", loadLink);
 			continue;
 		}
 		blobList[linkList] = window.URL.createObjectURL(await response.blob());
-		//console.log(`[${(new Date()).toTimeString().split(' ')[0]}] Loaded:`, loadLink);
 	}
 }
 
