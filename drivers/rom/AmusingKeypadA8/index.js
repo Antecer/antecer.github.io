@@ -42,14 +42,36 @@ function NetworkChecker(good, fail) {
 }
 
 (async () => {
-	while (!document.querySelector('.videoBox>iframe')) await sleep(500);
-	let playBox = document.querySelector('.videoBox>iframe');
-	NetworkChecker(
-		() => {
-			if (window.location.host != `antecer.github.io`) playBox.src = `//antecer.github.io/videos/`;
-		},
-		() => {
-			if (window.location.host != `antecer.gitee.io`) playBox.src = `//antecer.gitee.io/videos/`;
+	if (window.location.host.match('antecer.com')) {
+		NetworkChecker(
+			() => {
+				if (window.location.host != `antecer.github.io`) {
+					window.location.href = window.location.href.replace(/\/\/[^\/]+/, '//antecer.github.io');
+				}
+			},
+			() => {
+				if (window.location.host != `antecer.gitee.io`) {
+					window.location.href = window.location.href.replace(/\/\/[^\/]+/, '//antecer.gitee.io');
+				}
+			}
+		);
+	} else {
+		while (true) {
+			if (document.body) break;
+			await sleep(200);
 		}
-	);
+		let urlPaths = window.location.href.split('/');
+		let thisPath = urlPaths[urlPaths.length - 2];
+		document.title = `${thisPath}_ROMs`;
+		document.body.innerHTML += `<h3>${thisPath}_Firmware_List:</h3>`;
+		fetch('verlist.md')
+			.then((res) => res.text())
+			.then((txt) => {
+				let versions = txt.split('\n');
+				if (versions.length == 0) return;
+				versions.forEach((val, i) => {
+					document.body.innerHTML += `<a href="${thisPath}_${val}.akp">${val}</a><br><br>`;
+				});
+			});
+	}
 })();
