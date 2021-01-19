@@ -70,7 +70,7 @@ function NetworkChecker(good, fail) {
 				let versions = txt.split('\n');
 				if (versions.length == 0) return;
 				versions.forEach((val, i) => {
-					document.body.innerHTML += `<a href="${thisPath}_${val}.akp">${val}</a><br><br>`;
+					document.body.innerHTML += `<a download href="${thisPath}_${val}.akp">${val}</a><br><br>`;
 				});
 			});
 	}
