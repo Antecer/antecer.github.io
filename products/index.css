@@ -4,16 +4,23 @@
 	width: 100vw;
 	height: 100vh;
 	z-index: -1;
-	background: linear-gradient(#000000, transparent, #000000),
-		url('/resources/images/banner1.jpg') no-repeat center bottom;
+	background: linear-gradient(#000000, transparent, #000000), url('/resources/images/banner1.jpg') no-repeat center bottom;
 	background-attachment: fixed;
 	background-size: cover;
 }
 
-.footer{
+.footer {
 	position: fixed;
 	bottom: 30px;
 	right: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	z-index: 100;
+}
+.footer > * {
+	display: flex;
+	justify-content: flex-end;
 }
 
 .context,
@@ -27,7 +34,7 @@
 	justify-content: center;
 }
 
-.context>.content {
+.context > .content {
 	width: 100vw;
 	max-width: 1000px;
 	flex-flow: column;
@@ -55,13 +62,13 @@
 	overflow: hidden;
 }
 
-.productItem>img {
+.productItem > img {
 	width: 100%;
 	object-fit: cover;
 	visibility: hidden;
 }
 
-.productItem>:not(img) {
+.productItem > :not(img) {
 	margin: 0.1rem;
 }
 
@@ -69,13 +76,13 @@
 	flex-flow: column;
 }
 
-input[name="submit"] {
+input[name='submit'] {
 	margin-top: 0.1rem;
 	align-self: flex-end;
 	max-width: 100%;
 }
 
-form[onsubmit$="false"] input {
+form[onsubmit$='false'] input {
 	-webkit-filter: grayscale(1);
 	filter: gray;
 	filter: grayscale(1);
