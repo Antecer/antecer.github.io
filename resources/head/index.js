@@ -127,6 +127,7 @@ const countryListEN = {
 	FJ: 'Fiji',
 	FR: 'France',
 	GA: 'Gabon',
+	GB: 'United Kingdom',
 	GD: 'Grenada',
 	GE: 'Georgia',
 	GF: 'French Guiana',
@@ -241,7 +242,6 @@ const countryListEN = {
 	TZ: 'Tanzania',
 	UA: 'Ukraine',
 	UG: 'Uganda',
-	GB: 'United Kingdom',
 	US: 'United States',
 	UY: 'Uruguay',
 	UZ: 'Uzbekistan',
@@ -456,25 +456,34 @@ document.querySelector('#selectCY').addEventListener('click', (e) => {
 });
 // 填充运送地区列表
 (() => {
-	const countryTable = document.querySelector('.cylist');
+	const shipTable = document.querySelector('.cylist');
+	let sortedList = [];
+	// 查询运送地区名称表
 	shippingList.forEach((country) => {
-		var countryItem = document.createElement('div');
-		countryTable.appendChild(countryItem);
-		countryItem.outerHTML = `<div id="${country}" class="flag-icon flag-icon-${country.toLowerCase()}">${countryListEN[country]}</div>`;
+		sortedList.push([countryListEN[country],country]);
 	});
+	// 对运送地区按名称升序排序
+	sortedList.sort();
+	// 添加运送地区图标
+	sortedList.forEach((region) => {
+		let regionItem = document.createElement('div');
+		shipTable.appendChild(regionItem);
+		regionItem.outerHTML = `<div id="${region[1]}" class="flag-icon flag-icon-${region[1].toLowerCase()}">${region[0]}</div>`;
+	});
+	// 将图标按每行4个进行断行
 	for (spaceCountrys = shippingList.length % 4; spaceCountrys > 0 && spaceCountrys < 4; ++spaceCountrys) {
-		var spaceItem = document.createElement('div');
-		countryTable.appendChild(spaceItem);
+		let spaceItem = document.createElement('div');
+		shipTable.appendChild(spaceItem);
 		spaceItem.outerHTML = `<div class="flag-icon space"></div>`;
 	}
-	countryTable.addEventListener('click', (e) => {
-		var selectedCY = e.target;
+	shipTable.addEventListener('click', (e) => {
+		let selectedCY = e.target;
 		if (selectedCY.id == '') return;
 		document.querySelector('#selectCY').innerHTML = e.target.outerHTML;
 		document.querySelector('.cypanel').style.display = 'none';
 		localStorage.setItem('ShipTo', selectedCY.id);
 	});
-	var saveCY = localStorage.getItem('ShipTo');
+	let saveCY = localStorage.getItem('ShipTo');
 	if (saveCY) {
 		document.querySelector('#selectCY').innerHTML = document.getElementById(saveCY).outerHTML;
 	}
