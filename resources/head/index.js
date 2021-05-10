@@ -127,7 +127,7 @@ const countryListEN = {
 	FJ: 'Fiji',
 	FR: 'France',
 	GA: 'Gabon',
-	GB: 'British',
+	GB: 'United Kingdom',
 	GD: 'Grenada',
 	GE: 'Georgia',
 	GF: 'French Guiana',
