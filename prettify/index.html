@@ -1,204 +1,199 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8" />
+		<title>AmusingDevice</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<meta name="robots" content="index, follow" />
+		<meta name="author" content="Antecer" />
+		<meta name="keywords" content="osu,osu!,keypad,keypad switch,mini keypad,gaming keypad,usb keypad, osu keypad,keyboard,antecer,antecer keypad,programmable keypad,osu nono,mechanical keypad,cherry mx,amusingkeypad " />
+		<meta name="description" content="The AmusingKeypad is a keypad specially designed for the osu! game that allows the swapping of mechanical switches and easy portability." />
+		<link rel="stylesheet" href="/resources/fontawesome/css/all.min.css" />
+		<link rel="stylesheet" href="/resources/flagicons/css/flag-icon.css" />
+		<link rel="stylesheet" href="/resources/animate.css" />
+		<link rel="stylesheet" href="index.css" />
+		<script src="index.js"></script>
+	</head>
 
-<head>
-	<meta charset="utf-8">
-	<title>AmusingDevice</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta name="robots" content="index, follow">
-	<meta name="author" content="Antecer">
-	<meta name="keywords" content="osu,osu!,keypad,keypad switch,mini keypad,gaming keypad,usb keypad, osu keypad,keyboard,antecer,antecer keypad,programmable keypad,osu nono,mechanical keypad,cherry mx,amusingkeypad ">
-	<meta name="description" content="The AmusingKeypad is a keypad specially designed for the osu! game that allows the swapping of mechanical switches and easy portability.">
-	<link rel="stylesheet" href="/resources/fontawesome/css/all.min.css">
-	<link rel="stylesheet" href="/resources/flagicons/css/flag-icon.css">
-	<link rel="stylesheet" href="/resources/animate.css">
-	<link rel="stylesheet" href="index.css">
-	<script src="index.js"></script>
-</head>
-
-<body>
-	<!--导航-->
-	<div class="header fold animated fadeInDown">
-		<link rel="stylesheet" href="/resources/head/index.css">
-		<div class="content">
-			<div class="navpanel">
-				<div class="navicon">AmusingDevice</div>
-				<div class="navlink">
-					<a target="_top" class="fas fa-home" href="/home/">Home</a>
-					<a target="_top" class="fas fa-shopping-cart" href="/products/">Products</a>
-					<a target="_top" class="fas fa-palette" href="/prettify/">Prettify</a>
-					<a target="_top" class="fas fa-download" href="/drivers/">Drivers</a>
-					<a target="_top" class="fas fa-envelope" href="/support/">Support</a>
-					<a href="javascript:;" id="selectCY">
-						<div class="fas fa-globe-asia">ShipTo</div>
-					</a>
+	<body>
+		<!--导航-->
+		<div class="header fold animated fadeInDown">
+			<link rel="stylesheet" href="/resources/head/index.css" />
+			<div class="content">
+				<div class="navpanel">
+					<div class="navicon">AmusingDevice</div>
+					<div class="navlink">
+						<a target="_top" class="fas fa-home" href="/home/">Home</a>
+						<a target="_top" class="fas fa-shopping-cart" href="/products/">Products</a>
+						<a target="_top" class="fas fa-palette" href="/prettify/">Prettify</a>
+						<a target="_top" class="fas fa-download" href="/drivers/">Drivers</a>
+						<a target="_top" class="fas fa-envelope" href="/support/">Support</a>
+						<a href="javascript:;" id="selectCY">
+							<div class="fas fa-globe-asia">ShipTo</div>
+						</a>
+					</div>
+				</div>
+				<div class="cypanel">
+					<div class="space"></div>
+					<div class="cylist"></div>
 				</div>
 			</div>
-			<div class="cypanel">
-				<div class="space"></div>
-				<div class="cylist"></div>
+			<script src="/resources/head/index.js"></script>
+		</div>
+		<!--页脚-->
+		<div class="footer"></div>
+		<!--背景-->
+		<div class="backdrop"></div>
+		<!--正文-->
+		<div class="custom_panel">
+			<script src="colorpicker.min.js"></script>
+			<div class="page animated zoomIn">
+				<div class="content">
+					<img id="cropImg" src="" />
+					<svg id="keypadk5" class="cutImg" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 50mm; height: 50mm; fill: transparent; stroke-width: 0.2mm; stroke: gray">
+						<rect class="outline" x="0mm" y="0mm" rx="2.5mm" ry="2.5mm" width="50mm" height="50mm" />
+						<circle class="assHole" cx="4mm" cy="4mm" r="2.5mm" />
+						<circle class="assHole" cx="46mm" cy="4mm" r="2.5mm" />
+						<circle class="assHole" cx="46mm" cy="46mm" r="2.5mm" />
+						<circle class="assHole" cx="4mm" cy="46mm" r="2.5mm" />
+						<rect class="switchHole" x="8mm" y="8mm" width="14mm" height="14mm" />
+						<rect class="switchHole" x="28mm" y="8mm" width="14mm" height="14mm" />
+						<circle class="buttonHole" cx="13mm" cy="34mm" r="2.3mm" />
+						<circle class="buttonHole" cx="25mm" cy="34mm" r="2.3mm" />
+						<circle class="buttonHole" cx="37mm" cy="34mm" r="2.3mm" />
+					</svg>
+					<svg id="keypadk6" class="cutImg hide" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 70mm; height: 50mm; fill: transparent; stroke-width: 0.2mm; stroke: gray">
+						<rect class="outline" x="0mm" y="0mm" rx="2.5mm" ry="2.5mm" width="70mm" height="50mm" />
+						<circle class="assHole" cx="4mm" cy="4mm" r="2.5mm" />
+						<circle class="assHole" cx="66mm" cy="4mm" r="2.5mm" />
+						<circle class="assHole" cx="66mm" cy="46mm" r="2.5mm" />
+						<circle class="assHole" cx="4mm" cy="46mm" r="2.5mm" />
+						<rect class="switchHole" x="8mm" y="8mm" width="14mm" height="14mm" />
+						<rect class="switchHole" x="28mm" y="8mm" width="14mm" height="14mm" />
+						<rect class="switchHole" x="48mm" y="8mm" width="14mm" height="14mm" />
+						<rect class="switchHole" x="8mm" y="28mm" width="14mm" height="14mm" />
+						<rect class="switchHole" x="28mm" y="28mm" width="14mm" height="14mm" />
+						<rect class="switchHole" x="48mm" y="28mm" width="14mm" height="14mm" />
+					</svg>
+				</div>
 			</div>
-		</div>
-		<script src="/resources/head/index.js"></script>
-	</div>
-	<!--页脚-->
-	<div class="footer"></div>
-	<!--背景-->
-	<div class="backdrop"></div>
-	<!--正文-->
-	<div class="custom_panel">
-		<script src="colorpicker.min.js"></script>
-		<div class="page animated zoomIn">
-			<div class="content">
-				<img id="cropImg" src="" />
-				<svg id="keypadk5" class="cutImg" version="1.1" xmlns="http://www.w3.org/2000/svg"
-					 style="width:50mm; height:50mm; fill:transparent; stroke-width: 0.2mm; stroke:gray;">
-					<rect class="outline" x="0mm" y="0mm" rx="2.5mm" ry="2.5mm" width="50mm" height="50mm" />
-					<circle class="assHole" cx="4mm" cy="4mm" r="2.5mm" />
-					<circle class="assHole" cx="46mm" cy="4mm" r="2.5mm" />
-					<circle class="assHole" cx="46mm" cy="46mm" r="2.5mm" />
-					<circle class="assHole" cx="4mm" cy="46mm" r="2.5mm" />
-					<rect class="switchHole" x="8mm" y="8mm" width="14mm" height="14mm" />
-					<rect class="switchHole" x="28mm" y="8mm" width="14mm" height="14mm" />
-					<circle class="buttonHole" cx="13mm" cy="34mm" r="2.3mm" />
-					<circle class="buttonHole" cx="25mm" cy="34mm" r="2.3mm" />
-					<circle class="buttonHole" cx="37mm" cy="34mm" r="2.3mm" />
-				</svg>
-				<svg id="keypadk6" class="cutImg hide" version="1.1" xmlns="http://www.w3.org/2000/svg"
-					 style="width:70mm; height:50mm; fill:transparent; stroke-width: 0.2mm; stroke:gray">
-					<rect class="outline" x="0mm" y="0mm" rx="2.5mm" ry="2.5mm" width="70mm" height="50mm" />
-					<circle class="assHole" cx="4mm" cy="4mm" r="2.5mm" />
-					<circle class="assHole" cx="66mm" cy="4mm" r="2.5mm" />
-					<circle class="assHole" cx="66mm" cy="46mm" r="2.5mm" />
-					<circle class="assHole" cx="4mm" cy="46mm" r="2.5mm" />
-					<rect class="switchHole" x="8mm" y="8mm" width="14mm" height="14mm" />
-					<rect class="switchHole" x="28mm" y="8mm" width="14mm" height="14mm" />
-					<rect class="switchHole" x="48mm" y="8mm" width="14mm" height="14mm" />
-					<rect class="switchHole" x="8mm" y="28mm" width="14mm" height="14mm" />
-					<rect class="switchHole" x="28mm" y="28mm" width="14mm" height="14mm" />
-					<rect class="switchHole" x="48mm" y="28mm" width="14mm" height="14mm" />
-				</svg>
+			<div class="menu animated fadeInRight">
+				<select name="cutOptions">
+					<option value="keypadk5">KeyPadPro</option>
+					<option value="keypadk6">KeyPadK6</option>
+				</select>
+				<div class="colorpicker" style="display: flex; outline: 1px #d3d3d3 solid; height: 100px; cursor: crosshair">
+					<div id="picker" style="min-width: 100px; margin-right: 5px"></div>
+					<div id="slider"></div>
+				</div>
+				<input id="file" type="file" style="display: none" />
+				<input id="load" type="button" value="Load Image" />
+				<input id="print" type="button" value="Print Image" />
 			</div>
-		</div>
-		<div class="menu animated fadeInRight">
-			<select name="cutOptions">
-				<option value="keypadk5">KeyPadPro</option>
-				<option value="keypadk6">KeyPadK6</option>
-			</select>
-			<div class="colorpicker" style="display: flex; outline: 1px #D3D3D3 solid; height: 100px;cursor: crosshair;">
-				<div id="picker" style="min-width: 100px; margin-right: 5px;"></div>
-				<div id="slider"></div>
+			<div id="tips" class="animated fadeInUp">
+				Browser Support:
+				<em>Chrome</em>
+				<em>Firefox</em>
+				<em>Opera</em>
 			</div>
-			<input id="file" type="file" style="display: none;" />
-			<input id="load" type="button" value="Load Image" />
-			<input id="print" type="button" value="Print Image" />
-		</div>
-		<div id="tips" class="animated fadeInLeft">
-			Browser Support:
-			<em>Chrome</em>
-			<em>Firefox</em>
-			<em>Opera</em>
-		</div>
-		<script>
-			// 图片裁剪
-			function CropNode(selectNode, cropX, cropY, cropW, cropH, cropR) {
-				// 获取图片尺寸
-				let zoomVal = selectNode.style.transform ? selectNode.style.transform.match(/scale\(([^\)]*)/)[1] : 1;
-				let nodeX = selectNode.getBoundingClientRect().left;
-				let nodeY = selectNode.getBoundingClientRect().top;
-				let nodeW = selectNode.getBoundingClientRect().width;
-				let nodeH = selectNode.getBoundingClientRect().height;
-				// 获取裁剪尺寸
-				let cutLine = document.querySelector('svg.cutImg:not([class*="hide"])');
-				let cutX = cutLine.getBoundingClientRect().left;
-				let cutY = cutLine.getBoundingClientRect().top;
-				let cutW = cutLine.getBoundingClientRect().width;
-				let cutH = cutLine.getBoundingClientRect().height;
-				// 计算裁剪路径
-				let clipLeft = cutX - nodeX;
-				let clipTop = cutY - nodeY;
-				let clipRight = nodeW - clipLeft - cutW;
-				let clipBottom = nodeH - clipTop - cutH;
-				clipLeft /= zoomVal;
-				clipTop /= zoomVal;
-				clipRight /= zoomVal;
-				clipBottom /= zoomVal;
-				// 设置裁剪样式
-				selectNode.style.clipPath = `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px round ${cropR})`;
-			}
-			// 打印对话框弹出事件
-			window.addEventListener('beforeprint', (event) => {
-				CropNode(document.querySelector('#cropImg'), '0mm', '0mm', '50mm', '50mm', '2.5mm');
-			});
-			// 打印对话框关闭事件
-			window.addEventListener('afterprint', (event) => {
-				document.querySelector('#cropImg').style.clipPath = 'initial';
-			});
-			// 图片拖动与缩放功能
-			function DragNode(itemNode) {
-				let params = {
-					zoomVal: 1,
-					left: itemNode.offsetLeft,
-					top: itemNode.offsetTop,
-					currentX: 0,
-					currentY: 0,
-					flag: false,
-				};
-				// 鼠标滚轮事件
-				itemNode.addEventListener('wheel', (event) => {
-					if (params.zoomVal < 0.1 && event.deltaY > 0) return;
-					if (params.zoomVal > 2 && event.deltaY < 0) return;
-					params.zoomVal += event.deltaY > 0 ? -0.01 : +0.01;
-					itemNode.style.transform = `scale(${params.zoomVal})`;
-					event.preventDefault(); // 取消鼠标移动事件的默认操作
+			<script>
+				// 图片裁剪
+				function CropNode(selectNode, cropX, cropY, cropW, cropH, cropR) {
+					// 获取图片尺寸
+					let zoomVal = selectNode.style.transform ? selectNode.style.transform.match(/scale\(([^\)]*)/)[1] : 1;
+					let nodeX = selectNode.getBoundingClientRect().left;
+					let nodeY = selectNode.getBoundingClientRect().top;
+					let nodeW = selectNode.getBoundingClientRect().width;
+					let nodeH = selectNode.getBoundingClientRect().height;
+					// 获取裁剪尺寸
+					let cutLine = document.querySelector('svg.cutImg:not([class*="hide"])');
+					let cutX = cutLine.getBoundingClientRect().left;
+					let cutY = cutLine.getBoundingClientRect().top;
+					let cutW = cutLine.getBoundingClientRect().width;
+					let cutH = cutLine.getBoundingClientRect().height;
+					// 计算裁剪路径
+					let clipLeft = cutX - nodeX;
+					let clipTop = cutY - nodeY;
+					let clipRight = nodeW - clipLeft - cutW;
+					let clipBottom = nodeH - clipTop - cutH;
+					clipLeft /= zoomVal;
+					clipTop /= zoomVal;
+					clipRight /= zoomVal;
+					clipBottom /= zoomVal;
+					// 设置裁剪样式
+					selectNode.style.clipPath = `inset(${clipTop}px ${clipRight}px ${clipBottom}px ${clipLeft}px round ${cropR})`;
+				}
+				// 打印对话框弹出事件
+				window.addEventListener('beforeprint', (event) => {
+					CropNode(document.querySelector('#cropImg'), '0mm', '0mm', '50mm', '50mm', '2.5mm');
 				});
-				// 鼠标在图片上按下事件
-				itemNode.addEventListener('mousedown', (event) => {
-					params.flag = true;
-					params.currentX = event.clientX;
-					params.currentY = event.clientY;
+				// 打印对话框关闭事件
+				window.addEventListener('afterprint', (event) => {
+					document.querySelector('#cropImg').style.clipPath = 'initial';
 				});
-				// 鼠标按键释放全局事件
-				window.addEventListener('mouseup', (event) => {
-					params.flag = false;
-					params.left = itemNode.offsetLeft;
-					params.top = itemNode.offsetTop;
-				});
-				// 鼠标指针移动全局事件
-				window.addEventListener('mousemove', (event) => {
-					if (params.flag) {
-						let offsetX = event.clientX - params.currentX;
-						let offsetY = event.clientY - params.currentY;
-						itemNode.style.left = (params.left + offsetX) + "px";
-						itemNode.style.top = (params.top + offsetY) + "px";
+				// 图片拖动与缩放功能
+				function DragNode(itemNode) {
+					let params = {
+						zoomVal: 1,
+						left: itemNode.offsetLeft,
+						top: itemNode.offsetTop,
+						currentX: 0,
+						currentY: 0,
+						flag: false
+					};
+					// 鼠标滚轮事件
+					itemNode.addEventListener('wheel', (event) => {
+						if (params.zoomVal < 0.1 && event.deltaY > 0) return;
+						if (params.zoomVal > 2 && event.deltaY < 0) return;
+						params.zoomVal += event.deltaY > 0 ? -0.01 : +0.01;
+						itemNode.style.transform = `scale(${params.zoomVal})`;
 						event.preventDefault(); // 取消鼠标移动事件的默认操作
-					}
+					});
+					// 鼠标在图片上按下事件
+					itemNode.addEventListener('mousedown', (event) => {
+						params.flag = true;
+						params.currentX = event.clientX;
+						params.currentY = event.clientY;
+					});
+					// 鼠标按键释放全局事件
+					window.addEventListener('mouseup', (event) => {
+						params.flag = false;
+						params.left = itemNode.offsetLeft;
+						params.top = itemNode.offsetTop;
+					});
+					// 鼠标指针移动全局事件
+					window.addEventListener('mousemove', (event) => {
+						if (params.flag) {
+							let offsetX = event.clientX - params.currentX;
+							let offsetY = event.clientY - params.currentY;
+							itemNode.style.left = params.left + offsetX + 'px';
+							itemNode.style.top = params.top + offsetY + 'px';
+							event.preventDefault(); // 取消鼠标移动事件的默认操作
+						}
+					});
+				}
+				// 对目标图片绑定拖动&缩放功能
+				DragNode(document.querySelector('#cropImg'));
+				// 载入文件功能
+				document.querySelector('#file').addEventListener('change', (event) => {
+					let loadFile = event.currentTarget.files[0];
+					document.querySelector('#cropImg').src = URL.createObjectURL(loadFile);
+					document.querySelector('#cropImg').style = '';
+					URL.revokeObjectURL(loadFile);
 				});
-			}
-			// 对目标图片绑定拖动&缩放功能
-			DragNode(document.querySelector('#cropImg'));
-			// 载入文件功能
-			document.querySelector('#file').addEventListener('change', (event) => {
-				let loadFile = event.currentTarget.files[0];
-				document.querySelector('#cropImg').src = URL.createObjectURL(loadFile);
-				document.querySelector('#cropImg').style = '';
-				URL.revokeObjectURL(loadFile);
-			});
-			// 点击LoadImage按钮转为触发file按钮
-			document.querySelector('#load').addEventListener('click', (event) => {
-				document.querySelector('#file').click();
-			});
-			// 打印按钮点击事件
-			document.querySelector('#print').addEventListener('click', (event) => {
-				window.print();
-			});
-			// 取色器插件
-			ColorPicker(document.querySelector('#slider'), document.querySelector('#picker'), (hex, hsv, rgb, mousePicker, mouseSlider) => {
-				document.querySelector('svg.cutImg:not([class*="hide"])').style.stroke = hex;
-			});
-		</script>
-	</div>
-
-</body>
-
+				// 点击LoadImage按钮转为触发file按钮
+				document.querySelector('#load').addEventListener('click', (event) => {
+					document.querySelector('#file').click();
+				});
+				// 打印按钮点击事件
+				document.querySelector('#print').addEventListener('click', (event) => {
+					window.print();
+				});
+				// 取色器插件
+				ColorPicker(document.querySelector('#slider'), document.querySelector('#picker'), (hex, hsv, rgb, mousePicker, mouseSlider) => {
+					document.querySelector('svg.cutImg:not([class*="hide"])').style.stroke = hex;
+				});
+			</script>
+		</div>
+	</body>
 </html>
