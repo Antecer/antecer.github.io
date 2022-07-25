@@ -118,7 +118,7 @@ async function imageLoader(imageOrigin) {
 		let productName = products[p];
 		let productImgs = ImgPath.products[productName];
 		let imageUrls = {};
-		for (let i = 0, c = productImgs.length; i < c; ++i){
+		for (let i = 0, c = productImgs.length; i < c; ++i) {
 			let imageName = productImgs[i];
 			let imageLink = `${imageOrigin}/products/${productName}/${imageName}`;
 			imageUrls[imageName.slice(0, imageName.lastIndexOf('.'))] = imageLink;
@@ -210,4 +210,50 @@ async function setProductImgs() {
 			await imageLoader(`https://antecer.gitee.io`);
 			await setProductImgs();
 		});
+})();
+
+// 欧盟可送达的国家列表
+(async () => {
+	// 等待国家列表加载
+	while (true) {
+		try {
+			if (countryListCN) break;
+		} catch (e) {
+			await sleep(100);
+		}
+	}
+	// 不可送达的欧盟成员国
+	const EuropeanUnion = [
+		'奥地利',
+		'比利时',
+		'保加利亚',
+		'塞浦路斯',
+		'克罗地亚',
+		'捷克',
+		'丹麦',
+		'爱沙尼亚',
+		'芬兰',
+		'法国',
+		//'德国',
+		'希腊',
+		'匈牙利',
+		'爱尔兰',
+		'意大利',
+		'拉脱维亚',
+		'立陶宛',
+		'卢森堡',
+		'马耳他',
+		'荷兰',
+		'波兰',
+		'葡萄牙',
+		'罗马尼亚',
+		'斯洛伐克',
+		'斯洛文尼亚',
+		'西班牙',
+		'瑞典'
+	];
+	let targetCyName = countryListCN[localStorage.getItem('ShipTo')];
+	if (!EuropeanUnion.includes(targetCyName)) {
+		document.querySelector('.bulletin').style.display = 'none';
+	}
 })();
