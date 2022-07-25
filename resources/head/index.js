@@ -455,12 +455,12 @@ document.querySelector('#selectCY').addEventListener('click', (e) => {
 	}
 });
 // 填充运送地区列表
-(() => {
+(async () => {
 	const shipTable = document.querySelector('.cylist');
 	let sortedList = [];
 	// 查询运送地区名称表
 	shippingList.forEach((country) => {
-		sortedList.push([countryListEN[country],country]);
+		sortedList.push([countryListEN[country], country]);
 	});
 	// 对运送地区按名称升序排序
 	sortedList.sort();
@@ -484,6 +484,12 @@ document.querySelector('#selectCY').addEventListener('click', (e) => {
 		localStorage.setItem('ShipTo', selectedCY.id);
 	});
 	let saveCY = localStorage.getItem('ShipTo');
+	if (!saveCY) {
+		const ipQuery = await fetch('https://www.cloudflare.com/cdn-cgi/trace').then(response => response.text());
+		let ipMatchCY = ipQuery.match(/loc=([A-Z]*)/);
+		let ipCY = ipMatchCY ? ipMatchCY[1] : '';
+		if (shippingList.includes(ipCY)) localStorage.setItem('ShipTo', ipCY);
+	}
 	if (saveCY) {
 		document.querySelector('#selectCY').innerHTML = document.getElementById(saveCY).outerHTML;
 	}
