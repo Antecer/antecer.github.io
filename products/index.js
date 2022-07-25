@@ -253,7 +253,7 @@ async function setProductImgs() {
 		'瑞典'
 	];
 	let targetCyName = countryListCN[localStorage.getItem('ShipTo')];
-	if (!EuropeanUnion.includes(targetCyName)) {
+	if (targetCyName && (!EuropeanUnion.includes(targetCyName))) {
 		document.querySelector('.bulletin').style.display = 'none';
 	}
 })();
