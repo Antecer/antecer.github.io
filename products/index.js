@@ -152,7 +152,7 @@ async function setProductImgs() {
 	// keypadk5库存管理
 	setStock('keypadk5', {
 		'Silver': true,
-		'Black': true
+		'Black': false
 	});
 
 	// keypadk6库存管理
