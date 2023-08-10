@@ -4,12 +4,12 @@ const playerId = `#videoPlayer`;
 const playPath = `/videos/`;
 // 设置播放列表
 const playList = [
-	`6 digit chokes`,
-	`-mArisa- - Teo`,
-	`Kongdyy - (^3^)chu Dere Rhapsody`,
-	`Kongdyy - Beng Huai Shi Jie De Ge Ji Chinese Ver`,
-	`osu!keypad Game play demo`,
-	`opsu`
+	`6 digit chokes.mp4`,
+	`-mArisa- - Teo.mp4`,
+	`Kongdyy - (^3^)chu Dere Rhapsody.mp4`,
+	`Kongdyy - Beng Huai Shi Jie De Ge Ji Chinese Ver.mp4`,
+	`osu!keypad Game play demo.mp4`,
+	`opsu.mp4`
 ];
 
 // 创建播放列表缓存
