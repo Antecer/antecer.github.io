@@ -1,88 +1,52 @@
+const getType = (T) => Object.prototype.toString.call(T).slice(8, -1);
 /**
  * 创建sleep方法(用于async / await的延时处理)
  * @param {int} ms 延时毫秒数
  */
 function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
+	return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-/**
- * 网络环境判断
- * @param {Function} good 判定成功后执行的回调函数
- * @param {Function} fail 判定失败后执行的回调函数
- */
-function NetworkChecker(good, fail) {
-	// 添加超时判断 0-未知,1-成功,2-失败,3-超时
-	let isTimeOver = 0;
-	// 新建image元素,作为判断依据
-	let image = new Image();
-	// 访问正常
-	image.onload = function () {
-		if (isTimeOver == 0) {
-			isTimeOver = 1;
-			good();
-		}
-	};
-	// 访问失败
-	image.onerror = function () {
-		if (isTimeOver == 0) {
-			isTimeOver = 2;
-			fail();
-		}
-	};
-	// 访问超时(做失败处理)
-	setTimeout(() => {
-		if (isTimeOver == 0) {
-			isTimeOver = 3;
-			fail();
-		}
-	}, 500);
-	// 访问目标图片
-	image.src = `https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico?${Math.random()}`;
-}
-
-// Generic 库存管理函数
-function setStock(product = 'None', colors = {
-	'Color': false
-}) {
-	let formNode = document.querySelector(`#${product} form`);
-	if (formNode) {
-		// 总库存
-		let inStock = false;
-		Object.values(colors).forEach(val => {
-			inStock = inStock || val;
-		});
-		if (inStock) {
-			formNode.setAttribute('onsubmit', 'return true');
-		} else {
-			formNode.setAttribute('onsubmit', 'return false');
-			return;
-		}
-
-		// 分类库存
-		inStock = false;
-		Object.keys(colors).forEach(color => {
-			let stockColor = formNode.querySelector(`option[value=${color}]`);
-			if (stockColor) {
-				if (colors[color]) {
-					stockColor.removeAttribute('disabled');
-					stockColor.parentNode.value = color;
-				} else {
-					stockColor.setAttribute('disabled', 'disabled');
-				}
-			}
-		});
+// 背景图资源路径
+const BannerPath = '/resources/images/';
+const BannerFiles = ['banner1.jpg', 'banner2.jpg'];
+var BannerList = {};
+// 加载背景图片
+(async () => {
+	let BannerListDB = 'BannerList';
+	BannerList = (await localforage.getItem(BannerListDB)) || {};
+	for (let bannerName of BannerFiles) {
+		if (BannerList[bannerName]) continue;
+		let bannerUrl = `${BannerPath}${bannerName}`;
+		let response = await fetch(bannerUrl);
+		if (!response.ok) return console.log("FailLoad:", [bannerUrl]);
+		BannerList[bannerName] = await response.blob();
+		localforage.setItem(BannerListDB, BannerList);
 	}
-}
+})();
+// 设置背景图片
+(async () => {
+	let selectedBanner = BannerFiles[0];
+	let backdropSelector = '.backdrop';
+	while (!document.querySelector(backdropSelector)) await sleep(100);
+	let bannerBlob;
+	while (!bannerBlob) {
+		await sleep(100);
+		for (let banner in BannerList) {
+			if (banner == selectedBanner) { bannerBlob = BannerList[banner]; break; }
+		}
+	}
+	let bannerStyle = `linear-gradient(rgb(0, 0, 0), transparent, rgb(0, 0, 0)), url(${URL.createObjectURL(bannerBlob)})`;
+	document.querySelector(backdropSelector).style.backgroundImage = bannerStyle;
+})();
 
 // 图片资源列表
-const ImgPath = {
+const Images = {
 	"products": {
 		"default": [
 			"secret.png"
 		],
 		"keypadk5": [
-			"BlackLedColor.jpg",
+			"B&default.jpg",
 			"B&None.jpg",
 			"B&Red.jpg",
 			"B&Brown.jpg",
@@ -90,7 +54,7 @@ const ImgPath = {
 			"B&Black.jpg",
 			"B&Silver.jpg",
 			"B&All.jpg",
-			"SilverLedColor.jpg",
+			"S&default.jpg",
 			"S&None.jpg",
 			"S&Red.jpg",
 			"S&Brown.jpg",
@@ -98,9 +62,10 @@ const ImgPath = {
 			"S&Black.jpg",
 			"S&Silver.jpg",
 			"S&All.jpg"
-		],
+		]
+		,
 		"keypadk6": [
-			"BlackLedColor.jpg",
+			"B&default.jpg",
 			"B&None.jpg",
 			"B&Red.jpg",
 			"B&Brown.jpg",
@@ -108,44 +73,64 @@ const ImgPath = {
 			"B&Black.jpg",
 			"B&Silver.jpg"
 		]
+	},
+	"resources": {
+		"images": [
+			"add_to_cart.png",
+			"view_cart.png"
+		]
 	}
 };
-var Images = {};
-// 图片资源管理器
-async function imageLoader(imageOrigin) {
-	let products = Object.getOwnPropertyNames(ImgPath.products);
-	for (let p = 0, l = products.length; p < l; ++p) {
-		let productName = products[p];
-		let productImgs = ImgPath.products[productName];
-		let imageUrls = {};
-		for (let i = 0, c = productImgs.length; i < c; ++i) {
-			let imageName = productImgs[i];
-			let imageLink = `${imageOrigin}/products/${productName}/${imageName}`;
-			imageUrls[imageName.slice(0, imageName.lastIndexOf('.'))] = imageLink;
-			// 从网络预加载图片
-			(new Image()).src = imageLink;
+var ImageCache = {};
+
+// 加载图片资源
+(async () => {
+	// 加载图片资源列表
+	let imageList = [];
+	let traverseT = (item, path = '') => {
+		if (getType(item) == "Object") { for (let key in item) { traverseT(item[key], `${path}/${key}`); } }
+		else if (getType(item) == "Array") { for (let val of item) { imageList.push(`${path}/${val}`); } }
+	};
+	traverseT(Images);
+	// 加载图片缓存
+	let ImageCacheDB = 'ImageCache';
+	ImageCache = (await localforage.getItem(ImageCacheDB)) || {};
+	// 图片加载函数
+	let loadImg = async (imagePath) => {
+		if (ImageCache[imagePath]) return;
+		let response = await fetch(imagePath);
+		if (!response.ok) return console.log("FailLoad:", [imagePath]);
+		ImageCache[imagePath] = await response.blob();
+		await localforage.setItem(ImageCacheDB, ImageCache);
+	}
+	// 优先加载默认要显示的图片
+	let defaultImages = imageList.filter(path => path.toLowerCase().match(/default|cart/));
+	for (let imagePath of defaultImages) { await loadImg(imagePath); }
+	// 加载剩余图片
+	for (let imagePath of imageList) { await loadImg(imagePath); }
+})();
+
+// 页面交互逻辑
+(async () => {
+	// 设置图片
+	let setImg = async (imageNode, imagePath) => {
+		if (imageNode) {
+			let imageBlob = ImageCache[imagePath];
+			while (!imageBlob) {
+				await sleep(100);
+				imageBlob = ImageCache[imagePath];
+			}
+			imageNode.src = URL.createObjectURL(imageBlob);
 		}
-		Images[productName] = imageUrls;
 	}
-	console.log(Images);
-}
 
-// 图片切换
-function switchImg(product = 'None', switches = 'None') {
-	let productImg = document.querySelector(`#${product} [alt="productImg"]`);
-	if (productImg) {
-		productImg.src = Images[product][switches];
-	}
-}
-
-// 设置产品图片
-async function setProductImgs() {
+	// 等待html容器加载完成
 	while (!document.querySelector('.productRow')) await sleep(1000);
 
 	// 处理图片加载失败事件
 	document.querySelectorAll('img[alt="productImg"]').forEach(img => {
 		img.addEventListener('error', e => {
-			img.src = Images.secret.default;
+			img.src = ImageCache[`/products/default/secret.png`];
 		});
 	})
 
@@ -154,12 +139,17 @@ async function setProductImgs() {
 		'Silver': true,
 		'Black': true
 	});
-
 	// keypadk6库存管理
 	setStock('keypadk6', {
 		'Silver': false,
 		'Black': true
 	});
+
+	// 设置购物车图片
+	document.querySelectorAll('.productItem input[type="image"]').forEach(button => {
+		setImg(button, `/resources/images/add_to_cart.png`);
+	});
+	setImg(document.querySelector('.footer input[type="image"]'), `/resources/images/view_cart.png`);
 
 	// 设置产品图片
 	document.querySelectorAll('.productItem').forEach(productItem => {
@@ -167,50 +157,66 @@ async function setProductImgs() {
 		let productImg = productItem.querySelector('[alt="productImg"]');
 		switch (productItem.id) {
 			case 'keypadk5':
-				productImg.src = Images.keypadk5.BlackLedColor;
+				setImg(productImg, `/products/keypadk5/B&default.jpg`);
 				break;
 			case 'keypadk6':
-				productImg.src = Images.keypadk6.BlackLedColor;
+				setImg(productImg, `/products/keypadk6/B&default.jpg`);
 				break;
 			default:
-				productImg.src = Images.default.secret;
+				setImg(productImg, `/products/default/secret.png`);
 				break;
 		}
 		productImg.style.visibility = 'visible';
 		// 监听产品属性变更事件
-		let switchTypeNode = productItem.querySelector('select[name="os0"]');
+		let productTypeNode = productItem.querySelector('select[name="os0"]');
 		let productColorNode = productItem.querySelector('select[name="os1"]');
-		if (switchTypeNode && productColorNode) {
-			let switchType = switchTypeNode.value.replace('Cherry-', '');
+		if (productTypeNode && productColorNode) {
+			let productType = productTypeNode.value.replace('Cherry-', '');
 			let productColor = productColorNode.value[0];
-			switchImg(productItem.id, `${productColor}&${switchType}`);
+			setImg(productImg, `/products/${productItem.id}/${productColor}&${productType}.jpg`);
 
-			switchTypeNode.addEventListener('change', e => {
-				let switchType = switchTypeNode.value.replace('Cherry-', '');
+			productTypeNode.addEventListener('change', e => {
+				let productType = productTypeNode.value.replace('Cherry-', '');
 				let productColor = productColorNode.value[0];
-				switchImg(productItem.id, `${productColor}&${switchType}`);
+				setImg(productImg, `/products/${productItem.id}/${productColor}&${productType}.jpg`);
 			});
 			productColorNode.addEventListener('change', e => {
-				let switchType = switchTypeNode.value.replace('Cherry-', '');
+				let productType = productTypeNode.value.replace('Cherry-', '');
 				let productColor = productColorNode.value[0];
-				switchImg(productItem.id, `${productColor}&${switchType}`);
+				setImg(productImg, `/products/${productItem.id}/${productColor}&${productType}.jpg`);
 			});
 		}
 	});
-}
-
-// 加载图片
-(() => {
-	NetworkChecker(
-		async () => {
-			await imageLoader(`https://antecer.github.io`);
-			await setProductImgs();
-		},
-		async () => {
-			await imageLoader(`https://antecer.gitee.io`);
-			await setProductImgs();
-		});
 })();
+
+// 库存管理函数
+function setStock(product = 'None', colors = {}) {
+	let formNode = document.querySelector(`#${product} form`);
+	if (!formNode) return;
+	// 总库存
+	let inStock = false;
+	Object.values(colors).forEach(val => { inStock ||= val; });
+	if (inStock) {
+		formNode.setAttribute('onsubmit', 'return true');
+	} else {
+		formNode.setAttribute('onsubmit', 'return false');
+		return;
+	}
+
+	// 分类库存
+	inStock = false;
+	Object.keys(colors).forEach(color => {
+		let stockColor = formNode.querySelector(`option[value=${color}]`);
+		if (stockColor) {
+			if (colors[color]) {
+				stockColor.removeAttribute('disabled');
+				stockColor.parentNode.value = color;
+			} else {
+				stockColor.setAttribute('disabled', 'disabled');
+			}
+		}
+	});
+}
 
 // 欧盟可送达的国家列表
 (async () => {

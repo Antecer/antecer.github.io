@@ -445,8 +445,26 @@ const countryListCN = {
 	CN: '中国'
 };
 
+// 加载运送地区图片
+const DestPath = '/resources/flagicons/flags/';
+const DestType = ['1x1/', '4x3/'];
+const DestNames = shippingList.map(x => x.toLowerCase() + '.svg');
+var DestList = {};
+(async () => {
+	let DestListDB = 'DestList';
+	DestList = (await localforage.getItem(DestListDB)) || {};
+	for (let x of shippingList) {
+		if (DestList[x]) continue;
+		let destUrl = `${DestPath}${DestType[1]}${x.toLowerCase()}.svg`;
+		let response = await fetch(destUrl);
+		if (!response.ok) return console.log("FailLoad:", [destUrl]);
+		DestList[x] = await response.blob();
+		localforage.setItem(DestListDB, DestList);
+	}
+})();
+
 // 显示或隐藏国家选择列表
-document.querySelector('#selectCY').addEventListener('click', (e) => {
+document.getElementById('selectCY').addEventListener('click', (e) => {
 	var countryBtn = document.querySelector('.cypanel');
 	if (countryBtn.style.display == 'flex') {
 		countryBtn.style.display = 'none';
@@ -456,6 +474,7 @@ document.querySelector('#selectCY').addEventListener('click', (e) => {
 });
 // 填充运送地区列表
 (async () => {
+	let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 	const shipTable = document.querySelector('.cylist');
 	let sortedList = [];
 	// 查询运送地区名称表
@@ -464,11 +483,22 @@ document.querySelector('#selectCY').addEventListener('click', (e) => {
 	});
 	// 对运送地区按名称升序排序
 	sortedList.sort();
+	// 设置图标
+	let setIcon = async (nodeId) => {
+		let imageBlob = DestList[nodeId];
+		while (!imageBlob) {
+			await sleep(100);
+			imageBlob = DestList[nodeId];
+		}
+		let iconNodes = document.querySelectorAll(`#${nodeId}`);
+		while (iconNodes.length == 0) { await sleep(100); }
+		iconNodes.forEach((x) => x.insertAdjacentHTML('afterbegin', `<img src="${URL.createObjectURL(imageBlob)}"/>`));
+	}
 	// 添加运送地区图标
 	sortedList.forEach((region) => {
-		let regionItem = document.createElement('div');
-		shipTable.appendChild(regionItem);
-		regionItem.outerHTML = `<div id="${region[1]}" class="flag-icon flag-icon-${region[1].toLowerCase()}">${region[0]}</div>`;
+		let regionHtml = `<div id="${region[1]}" class="flag-icon">${region[0]}</div>`;
+		shipTable.insertAdjacentHTML('beforeend', regionHtml);
+		setIcon(region[1]);
 	});
 	// 将图标按每行4个进行断行
 	for (spaceCountrys = shippingList.length % 4; spaceCountrys > 0 && spaceCountrys < 4; ++spaceCountrys) {
@@ -476,21 +506,20 @@ document.querySelector('#selectCY').addEventListener('click', (e) => {
 		shipTable.appendChild(spaceItem);
 		spaceItem.outerHTML = `<div class="flag-icon space"></div>`;
 	}
-	shipTable.addEventListener('click', (e) => {
+	shipTable.addEventListener('click', async (e) => {
 		let selectedCY = e.target;
 		if (selectedCY.id == '') return;
-		document.querySelector('#selectCY').innerHTML = e.target.outerHTML;
+		document.getElementById('selectCY').innerHTML = e.target.outerHTML;
 		document.querySelector('.cypanel').style.display = 'none';
-		localStorage.setItem('ShipTo', selectedCY.id);
+		await localforage.setItem('ShipTo', selectedCY.id);
 	});
-	let saveCY = localStorage.getItem('ShipTo');
+	let saveCY = await localforage.getItem('ShipTo');
 	if (!saveCY) {
 		const ipQuery = await fetch('https://www.cloudflare.com/cdn-cgi/trace').then(response => response.text());
 		let ipMatchCY = ipQuery.match(/loc=([A-Z]*)/);
 		let ipCY = ipMatchCY ? ipMatchCY[1] : '';
-		if (shippingList.includes(ipCY)) localStorage.setItem('ShipTo', ipCY);
-	}
-	if (saveCY) {
-		document.querySelector('#selectCY').innerHTML = document.getElementById(saveCY).outerHTML;
+		if (shippingList.includes(ipCY)) await localforage.setItem('ShipTo', ipCY);
+	} else {
+		document.getElementById('selectCY').innerHTML = document.getElementById(saveCY).outerHTML;
 	}
 })();
