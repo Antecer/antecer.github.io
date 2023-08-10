@@ -25,47 +25,60 @@ function sleep(ms) {
 
 /**
  * 缓存列表内的视频
- * @param {Array} linkList 包含多个视频链接的数组
  */
-async function LoadVideo(linkList) {
-	for (let i = 0, len = linkList.length; i < len; i++) {
-		let loadLink = `${playPath}${linkList[i]}`;
-		let response = await fetch(loadLink);
-		if (!response.ok) {
-			console.log("Failed:", loadLink);
+(async () => {
+	for (let playName of playList) {
+		let videoBlob = await localforage.getItem(playName);
+		if (videoBlob) {
+			blobList[playName] = videoBlob;
+			console.log('local loaded:', [playName]);
 			continue;
 		}
-		blobList[linkList] = window.URL.createObjectURL(await response.blob());
-	}
-}
 
+		let loadLink = `${playPath}${playName}`;
+		console.log('fetch loading:', [loadLink]);
+		let response = await fetch(loadLink);
+		if (!response.ok) { console.log("FailLoad:", [loadLink]); continue; }
+		videoBlob = await response.blob();
+		blobList[playName] = videoBlob;
+		console.log('fetch loaded:', [playName]);
+		localforage.setItem(playName, videoBlob);
+	}
+})();
+
+/**
+ * 播放视频
+ */
 (async () => {
-	// 等待播放器加载
 	while (!document.querySelector(playerId)) await sleep(500);
 	let video = document.querySelector(playerId);
-	video.src = URL.createObjectURL(new MediaSource());
+	let playName;
 	// 视频播放结束事件
-	video.addEventListener('ended', () => {
-		for (let i = 0, len = playList.length; i < len; ++i) {
-			if (video.src == blobList[playList[i]]) {
-				if (++i < len && blobList[playList[i]]) {
-					video.src = blobList[playList[i]];
-					if (++i < len && !blobList[playList[i]]) {
-						LoadVideo([playList[i]]);
-					}
-				} else {
-					video.src = blobList[playList[0]];
-				}
+	video.addEventListener('ended', async function () {
+		let playIndex = playList.indexOf(playName) + 1;
+		playName = playList[playIndex] || playList[0];
+		let playBlob = blobList[playName];
+		if (!playBlob) {
+			for (let key in blobList) {
+				playName = key;
+				playBlob = blobList[playName];
 				break;
 			}
 		}
-		video.play();
+		video.src = URL.createObjectURL(playBlob);
 	});
-	// 加载播放列表
-	await LoadVideo([playList[0]]);
+	// 视频资源已加载事件
+	video.addEventListener('loadedmetadata', function () {
+		this.style.opacity = 1;
+		this.currentTime = 1;
+	}, false);
 	// 载入第一个视频
-	video.src = blobList[playList[0]];
-	video.play();
-	// 预加载下一个视频
-	if (playList.length > 1) await LoadVideo([playList[1]]);
+	while (!playName) {
+		await sleep(100);
+		for (let key in blobList) {
+			playName = key;
+			break;
+		}
+	}
+	video.src = URL.createObjectURL(blobList[playName]);
 })();
