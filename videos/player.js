@@ -29,10 +29,12 @@ function sleep(ms) {
 	for (let videoName of VideoList) {
 		if (VideoCache[videoName]) continue;
 		let videoUrl = `${VideoPath}${videoName}`;
+		console.log(`Loading: ${videoUrl}`);
 		let response = await fetch(videoUrl);
 		if (!response.ok) return console.log("FailLoad:", [videoUrl]);
 		VideoCache[videoName] = await response.blob();
 		localforage.setItem(VideoCacheDB, VideoCache);
+		console.log(`Complete: ${videoUrl}`);
 	}
 })();
 
