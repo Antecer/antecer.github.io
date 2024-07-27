@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Keypads</title>
+        <link rel="stylesheet" href="index.css" />
+        <script src="resources/localforage.min.js"></script>
+        <script src="resources/webusbapi.js"></script>
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <!-- 导航 -->
+        <div class="header"></div>
+        <!-- 正文 -->
+        <div class="context">
+            <div class="content"></div>
+        </div>
+        <!-- 配置 -->
+        <div class="configs">
+            <div class="tab_list">
+                <div class="tab_label">Ansi</div>
+                <div class="tab_label">Basic</div>
+                <div class="tab_label">Media</div>
+                <div class="tab_label">Special</div>
+                <div class="tab_label">Layers</div>
+                <div class="tab_label">Custom</div>
+                <div class="tab_label">KeyScript</div>
+                <div class="tab_label">LedScript</div>
+                <div class="tab_label">Settings</div>
+            </div>
+            <div class="tab_content">
+                <div class="tab_panel"></div>
+                <div class="tab_tips"></div>
+            </div>
+        </div>
+        <input type="file" id="fileSelector" style="display: none"/>
+    </body>
+</html>

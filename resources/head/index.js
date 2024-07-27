@@ -67,7 +67,7 @@ const shippingList = [
 	'SK',
 	'LV',
 	'CN'
-].sort();
+];
 
 const countryListEN = {
 	AD: 'Republic of Andorra',

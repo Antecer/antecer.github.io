@@ -1,55 +1,52 @@
 .backdrop {
-	position: fixed;
-	top: 0px;
-	width: 100vw;
-	height: 100vh;
-	z-index: -1;
-	background: linear-gradient(#000000, transparent, #000000),
-		url('') no-repeat center bottom;
-	background-attachment: fixed;
-	background-size: cover;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -100;
+	object-fit: cover;
+	filter: brightness(60%);
 }
 
 .footer {
-	position: fixed;
-	bottom: 5px;
-	left: 5px;
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
 }
 
 .context,
 .context * {
-	display: flex;
+    display: flex;
 }
 
 .context {
-	width: 100vw;
-	min-height: 100vh;
-	justify-content: center;
+    width: 100vw;
+    min-height: 100vh;
+    justify-content: center;
 }
 
-.context>.content {
-	width: 100vw;
-	max-width: 1000px;
-	flex-flow: column;
-	justify-content: center;
+.context > .content {
+    width: 100vw;
+    max-width: 1000px;
+    flex-flow: column;
+    justify-content: center;
 }
 
 .exhibit {
-	width: 100%;
-	height: 100%;
-	align-items: center;
+    width: 100%;
+    height: 100%;
+    align-items: center;
 }
 
 .videoBox {
-	width: 100%;
-	max-width: 100vw;
-	height: 0;
-	padding-bottom: 56.25%;
-	position: relative;
+    width: 100%;
+    max-width: 100vw;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
 }
 
-.videoBox>* {
-	width: 100%;
-	height: 100%;
-	position: absolute;
+.videoBox > * {
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }

@@ -50,9 +50,6 @@ function NetworkChecker(good, fail) {
 				}
 			},
 			() => {
-				if (window.location.host != `antecer.gitee.io`) {
-					window.location.href = window.location.href.replace(/\/\/[^\/]+/, '//antecer.gitee.io');
-				}
 			}
 		);
 	} else {

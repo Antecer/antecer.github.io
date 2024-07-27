@@ -34,6 +34,7 @@ var BannerList = {};
 			if (banner == selectedBanner) { bannerBlob = BannerList[banner]; break; }
 		}
 	}
-	let bannerStyle = `linear-gradient(rgb(0, 0, 0), transparent, rgb(0, 0, 0)), url(${URL.createObjectURL(bannerBlob)})`;
-	document.querySelector(backdropSelector).style.backgroundImage = bannerStyle;
+	document.querySelector(backdropSelector).src = URL.createObjectURL(bannerBlob);
+	// let bannerHTML = `<img src="${URL.createObjectURL(bannerBlob)}" />`;
+	// document.querySelector(backdropSelector).insertAdjacentHTML('afterbegin', bannerHTML);
 })();

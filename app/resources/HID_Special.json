@@ -1,0 +1,21 @@
+{
+    "0x1001": "System_Power",
+    "0x1002": "System_Sleep",
+    "0x1004": "System_Wake",
+    "0x2001": "Mouse_LeftButton",
+    "0x2002": "Mouse_RightButton",
+    "0x2004": "Mouse_MiddleButton",
+    "0x2008": "Mouse_Previous",
+    "0x2010": "Mouse_Forward",
+    "0x2020": "Mouse_K6",
+    "0x2040": "Mouse_K7",
+    "0x2080": "Mouse_K8",
+    "0x2101": "Cursor →",
+    "0x21FF": "Cursor ←",
+    "0x2201": "Cursor ↑",
+    "0x22FF": "Cursor ↓",
+    "0x2301": "Wheel ↑",
+    "0x23FF": "Wheel ↓",
+    "0x2401": "Wheel →",
+    "0x24FF": "Wheel ←"
+}
